@@ -6,21 +6,22 @@
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 .container {
-  background: white;
-  padding: 40px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px 30px;
   border-radius: 20px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   max-width: 600px;
-  width: 90%;
+  width: 100%;
 }
 
 h1 {
@@ -64,8 +65,7 @@ button {
   font-size: 18px;
   line-height: 1.8;
   margin: 20px auto;
-  max-width: 500px;
-  text-align: center;
+  max-width: 550px;
 }
 
 #nextBtn {
