@@ -18,7 +18,7 @@ body {
   padding: 40px;
   border-radius: 20px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
@@ -56,4 +56,20 @@ button {
 
 .hidden {
   display: none;
+}
+
+#loveText {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 20px 0;
+  min-height: 120px;
+}
+
+#nextBtn {
+  background: #ff4d6d;
+  color: white;
+}
+
+#nextBtn:hover {
+  background: #e63950;
 }
