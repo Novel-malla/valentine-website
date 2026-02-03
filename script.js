@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const yesBox = document.getElementById("yesBox");
   const loveText = document.getElementById("loveText");
   const nextBtn = document.getElementById("nextBtn");
+  const galleryBox = document.getElementById("galleryBox");
+  const galleryNextBtn = document.getElementById("galleryNextBtn");
 
   // Safety check (important)
   if (!yesBtn || !noBtn) {
@@ -52,7 +54,14 @@ tomorrow, and always? ❤️
     typeLetter();
   });
 
+  // Next from love letter → gallery
   nextBtn.addEventListener("click", () => {
-    alert("Next feature coming ❤️");
+    yesBox.classList.add("hidden");
+    galleryBox.classList.remove("hidden");
+  });
+
+  // Placeholder for next step
+  galleryNextBtn.addEventListener("click", () => {
+    alert("Next surprise coming 😏");
   });
 });
