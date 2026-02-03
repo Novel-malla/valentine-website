@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     gallery: {
       question: "When did I said I love you for the first time?",
-      options: ["May 2021", "March 2021", "January 2021", "Spetmenber 2021"],
+      options: ["May 2021", "March 2021", "January 2021", "September 2021"],
       answer: 1
     },
     timer: {
@@ -110,6 +110,7 @@ tomorrow, and always? ❤️
       loveText.innerHTML = "";
       index = 0;
       typeLetter();
+      startBigHearts();
     });
   });
 
@@ -118,6 +119,7 @@ tomorrow, and always? ❤️
     showQuiz("gallery", () => {
       yesBox.classList.add("hidden");
       galleryBox.classList.remove("hidden");
+      startBigHearts();
     });
   });
 
@@ -145,6 +147,7 @@ tomorrow, and always? ❤️
       timerBox.classList.remove("hidden");
       updateTimer();
       setInterval(updateTimer, 1000);
+      startBigHearts();
     });
   });
 
@@ -188,6 +191,4 @@ tomorrow, and always? ❤️
       setTimeout(() => heart.remove(), 9000);
     }, 500);
   }
-
-  startBigHearts();
 });
