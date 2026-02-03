@@ -66,11 +66,6 @@ tomorrow, and always? ❤️
     galleryBox.classList.remove("hidden");
   });
 
-  // Placeholder for next step
-  galleryNextBtn.addEventListener("click", () => {
-    alert("Next surprise coming 😏");
-  });
-
   const startDate = new Date("2020-12-08T19:35:00");
 
   function updateTimer() {
