@@ -7,6 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextBtn = document.getElementById("nextBtn");
   const galleryBox = document.getElementById("galleryBox");
   const galleryNextBtn = document.getElementById("galleryNextBtn");
+  const timerBox = document.getElementById("timerBox");
+  const timerNextBtn = document.getElementById("timerNextBtn");
+  const daysEl = document.getElementById("days");
+  const hoursEl = document.getElementById("hours");
+  const minutesEl = document.getElementById("minutes");
+  const secondsEl = document.getElementById("seconds");
 
   // Safety check (important)
   if (!yesBtn || !noBtn) {
@@ -63,5 +69,35 @@ tomorrow, and always? ❤️
   // Placeholder for next step
   galleryNextBtn.addEventListener("click", () => {
     alert("Next surprise coming 😏");
+  });
+
+  const startDate = new Date("2020-12-08T19:35:00");
+
+  function updateTimer() {
+    const now = new Date();
+    const diff = now - startDate;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    daysEl.textContent = days;
+    hoursEl.textContent = hours;
+    minutesEl.textContent = minutes;
+    secondsEl.textContent = seconds;
+  }
+
+  // Gallery → Timer
+  galleryNextBtn.addEventListener("click", () => {
+    galleryBox.classList.add("hidden");
+    timerBox.classList.remove("hidden");
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  });
+
+  // Timer → Next
+  timerNextBtn.addEventListener("click", () => {
+    alert("Final surprise coming 😏💍");
   });
 });
