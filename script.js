@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const hoursEl = document.getElementById("hours");
   const minutesEl = document.getElementById("minutes");
   const secondsEl = document.getElementById("seconds");
+  const proposalBox = document.getElementById("proposalBox");
+  const heartsContainer = document.getElementById("hearts");
 
   // Safety check (important)
   if (!yesBtn || !noBtn) {
@@ -91,8 +93,27 @@ tomorrow, and always? ❤️
     setInterval(updateTimer, 1000);
   });
 
-  // Timer → Next
   timerNextBtn.addEventListener("click", () => {
-    alert("Final surprise coming 😏💍");
+    timerBox.classList.add("hidden");
+    proposalBox.classList.remove("hidden");
+    startHearts();
   });
+
+  // Create floating hearts
+  function startHearts() {
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+
+      heartsContainer.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }, 300);
+  }
 });
