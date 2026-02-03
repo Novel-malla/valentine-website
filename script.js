@@ -15,6 +15,55 @@ document.addEventListener("DOMContentLoaded", () => {
   const secondsEl = document.getElementById("seconds");
   const proposalBox = document.getElementById("proposalBox");
   const heartsContainer = document.getElementById("hearts");
+  const quizBox = document.getElementById("quizBox");
+  const quizQuestion = document.getElementById("quizQuestion");
+  const optionButtons = document.querySelectorAll(".option");
+
+  let currentCallback = null;
+
+  // Quiz data (CUSTOMIZE QUESTIONS!)
+  const quizzes = {
+    letter: {
+      question: "Where did we first meet?",
+      options: ["Cafe", "College", "Party", "Online"],
+      answer: 1
+    },
+    gallery: {
+      question: "Who said I love you first?",
+      options: ["You", "Me", "Both", "Nobody"],
+      answer: 0
+    },
+    timer: {
+      question: "Which month did we start dating?",
+      options: ["Jan", "Feb", "Mar", "Apr"],
+      answer: 1
+    },
+    proposal: {
+      question: "Do you love me?",
+      options: ["Yes ❤️", "YES ❤️❤️", "Obviously ❤️❤️❤️", "All of these 😄"],
+      answer: 3
+    }
+  };
+
+  function showQuiz(key, onSuccess) {
+    const quiz = quizzes[key];
+    quizQuestion.textContent = quiz.question;
+
+    optionButtons.forEach((btn, index) => {
+      btn.textContent = quiz.options[index];
+      btn.onclick = () => {
+        if (index === quiz.answer) {
+          quizBox.classList.add("hidden");
+          onSuccess();
+        } else {
+          alert("Oops 😢 Wrong answer. Start again ❤️");
+          location.reload();
+        }
+      };
+    });
+
+    quizBox.classList.remove("hidden");
+  }
 
   // Safety check (important)
   if (!yesBtn || !noBtn) {
@@ -64,8 +113,10 @@ tomorrow, and always? ❤️
 
   // Next from love letter → gallery
   nextBtn.addEventListener("click", () => {
-    yesBox.classList.add("hidden");
-    galleryBox.classList.remove("hidden");
+    showQuiz("gallery", () => {
+      yesBox.classList.add("hidden");
+      galleryBox.classList.remove("hidden");
+    });
   });
 
   const startDate = new Date("2020-12-08T19:35:00");
@@ -87,10 +138,12 @@ tomorrow, and always? ❤️
 
   // Gallery → Timer
   galleryNextBtn.addEventListener("click", () => {
-    galleryBox.classList.add("hidden");
-    timerBox.classList.remove("hidden");
-    updateTimer();
-    setInterval(updateTimer, 1000);
+    showQuiz("timer", () => {
+      galleryBox.classList.add("hidden");
+      timerBox.classList.remove("hidden");
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    });
   });
 
   // Create floating hearts
@@ -112,8 +165,10 @@ tomorrow, and always? ❤️
   }
 
   timerNextBtn.addEventListener("click", () => {
-    timerBox.classList.add("hidden");
-    proposalBox.classList.remove("hidden");
-    startHearts();
+    showQuiz("proposal", () => {
+      timerBox.classList.add("hidden");
+      proposalBox.classList.remove("hidden");
+      startHearts();
+    });
   });
 });
