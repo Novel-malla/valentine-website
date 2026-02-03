@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     gallery: {
       question: "When did I said I love you for the first time?",
-      options: ["May 2021", "January 2021", "March 2021", "Spetmenber 2021"],
-      answer: 0
+      options: ["May 2021", "March 2021", "January 2021", "Spetmenber 2021"],
+      answer: 1
     },
     timer: {
       question: "What was the exact time when I proposed?",
@@ -173,4 +173,21 @@ tomorrow, and always? ❤️
       startHearts();
     });
   });
+
+  function startBigHearts() {
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart", "big-heart");
+      heart.innerHTML = "❤️";
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 6 + Math.random() * 4 + "s";
+
+      document.getElementById("hearts").appendChild(heart);
+
+      setTimeout(() => heart.remove(), 9000);
+    }, 500);
+  }
+
+  startBigHearts();
 });

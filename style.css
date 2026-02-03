@@ -254,3 +254,8 @@ button {
 .option:hover {
   background: #e63950;
 }
+
+.big-heart {
+  font-size: 50px;
+  animation: floatUp 8s linear infinite;
+}
