@@ -93,12 +93,6 @@ tomorrow, and always? ❤️
     setInterval(updateTimer, 1000);
   });
 
-  timerNextBtn.addEventListener("click", () => {
-    timerBox.classList.add("hidden");
-    proposalBox.classList.remove("hidden");
-    startHearts();
-  });
-
   // Create floating hearts
   function startHearts() {
     setInterval(() => {
@@ -116,4 +110,10 @@ tomorrow, and always? ❤️
       }, 7000);
     }, 300);
   }
+
+  timerNextBtn.addEventListener("click", () => {
+    timerBox.classList.add("hidden");
+    proposalBox.classList.remove("hidden");
+    startHearts();
+  });
 });
