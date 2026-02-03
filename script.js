@@ -24,19 +24,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // Quiz data (CUSTOMIZE QUESTIONS!)
   const quizzes = {
     letter: {
-      question: "Where did we first meet?",
-      options: ["Cafe", "College", "Party", "Online"],
-      answer: 1
+      question: "Where did we go for our first date?",
+      options: ["The Big Chill", "Diggin", "Music and Mountains", "Bread and More"],
+      answer: 2
     },
     gallery: {
-      question: "Who said I love you first?",
-      options: ["You", "Me", "Both", "Nobody"],
+      question: "When did I said I love you for the first time?",
+      options: ["May 2021", "January 2021", "March 2021", "Spetmenber 2021"],
       answer: 0
     },
     timer: {
-      question: "Which month did we start dating?",
-      options: ["Jan", "Feb", "Mar", "Apr"],
-      answer: 1
+      question: "What was the exact time when I proposed?",
+      options: ["7:35 PM", "9 PM", "6:45 PM", "8:30 PM"],
+      answer: 0
     },
     proposal: {
       question: "Do you love me?",
@@ -104,11 +104,13 @@ tomorrow, and always? ❤️
 
   // YES click ✅
   yesBtn.addEventListener("click", () => {
-    questionBox.classList.add("hidden");
-    yesBox.classList.remove("hidden");
-    loveText.innerHTML = "";
-    index = 0;
-    typeLetter();
+    showQuiz("letter", () => {
+      questionBox.classList.add("hidden");
+      yesBox.classList.remove("hidden");
+      loveText.innerHTML = "";
+      index = 0;
+      typeLetter();
+    });
   });
 
   // Next from love letter → gallery
