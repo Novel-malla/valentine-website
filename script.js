@@ -256,21 +256,22 @@ tomorrow, and always? ❤️
   }
 
   document.addEventListener("click", (e) => {
-    if (!e.target.classList.contains("backBtn")) return;
+    const backBtn = e.target.closest(".backBtn");
+    if (!backBtn) return;
 
     // Hide all gift pages
     document.getElementById("letterGift")?.classList.add("hidden");
     document.getElementById("videoGift")?.classList.add("hidden");
     document.getElementById("gameGift")?.classList.add("hidden");
 
-    // Stop video if exists
+    // Stop video if playing
     const video = document.querySelector("#videoGift video");
     if (video) {
       video.pause();
       video.currentTime = 0;
     }
 
-    // Reset game if exists
+    // Reset game
     const gameArea = document.getElementById("gameArea");
     if (gameArea) {
       gameArea.innerHTML = "";
@@ -278,6 +279,7 @@ tomorrow, and always? ❤️
 
     // Show gifts page
     giftsBox.classList.remove("hidden");
+    console.log("Back button clicked");
   });
 
 });
