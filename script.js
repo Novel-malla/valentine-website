@@ -18,8 +18,54 @@ document.addEventListener("DOMContentLoaded", () => {
   const quizBox = document.getElementById("quizBox");
   const quizQuestion = document.getElementById("quizQuestion");
   const optionButtons = document.querySelectorAll(".option");
+  const giftsBox = document.getElementById("giftsBox");
+  const gifts = document.querySelectorAll(".gift");
 
   let currentCallback = null;
+
+  let score = 0;
+  const gameArea = document.getElementById("gameArea");
+  const scoreText = document.getElementById("scoreText");
+
+  function startGame() {
+    score = 0;
+    scoreText.textContent = "Score: 0";
+
+    const interval = setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("game-heart");
+      heart.innerHTML = "❤️";
+
+      heart.style.left = Math.random() * 90 + "%";
+      heart.style.top = Math.random() * 80 + "%";
+
+      heart.onclick = () => {
+        score++;
+        scoreText.textContent = "Score: " + score;
+        heart.remove();
+
+        if (score === 3) {
+          clearInterval(interval);
+          alert("You caught my heart ❤️🥹");
+        }
+      };
+
+      gameArea.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 2000);
+    }, 800);
+  }
+
+  gifts.forEach(gift => {
+    gift.addEventListener("click", () => {
+      gift.classList.add("open");
+
+      setTimeout(() => {
+        const type = gift.dataset.gift;
+        openGift(type);
+      }, 600);
+    });
+  });
 
   // Quiz data (CUSTOMIZE QUESTIONS!)
   const quizzes = {
@@ -118,7 +164,7 @@ tomorrow, and always? ❤️
   nextBtn.addEventListener("click", () => {
     showQuiz("gallery", () => {
       yesBox.classList.add("hidden");
-      galleryBox.classList.remove("hidden");
+      giftsBox.classList.remove("hidden");
       startBigHearts();
     });
   });
@@ -143,7 +189,7 @@ tomorrow, and always? ❤️
   // Gallery → Timer
   galleryNextBtn.addEventListener("click", () => {
     showQuiz("timer", () => {
-      galleryBox.classList.add("hidden");
+      giftsBox.classList.add("hidden");
       timerBox.classList.remove("hidden");
       updateTimer();
       setInterval(updateTimer, 1000);
@@ -190,5 +236,22 @@ tomorrow, and always? ❤️
 
       setTimeout(() => heart.remove(), 9000);
     }, 500);
+  }
+
+  function openGift(type) {
+    giftsBox.classList.add("hidden");
+
+    if (type === "letter") {
+      document.getElementById("letterGift").classList.remove("hidden");
+    }
+
+    if (type === "video") {
+      document.getElementById("videoGift").classList.remove("hidden");
+    }
+
+    if (type === "game") {
+      document.getElementById("gameGift").classList.remove("hidden");
+      startGame();
+    }
   }
 });
