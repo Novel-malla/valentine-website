@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const optionButtons = document.querySelectorAll(".option");
   const giftsBox = document.getElementById("giftsBox");
   const gifts = document.querySelectorAll(".gift");
+  const backButtons = document.querySelectorAll(".backBtn");
 
   let currentCallback = null;
 
@@ -64,6 +65,31 @@ document.addEventListener("DOMContentLoaded", () => {
         const type = gift.dataset.gift;
         openGift(type);
       }, 600);
+    });
+  });
+
+  backButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      // Hide all gift pages
+      document.getElementById("letterGift").classList.add("hidden");
+      document.getElementById("videoGift").classList.add("hidden");
+      document.getElementById("gameGift").classList.add("hidden");
+
+      // Stop video if playing
+      const video = document.querySelector("#videoGift video");
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+
+      // Clear game area
+      const gameArea = document.getElementById("gameArea");
+      if (gameArea) {
+        gameArea.innerHTML = "";
+      }
+
+      // Show gifts again
+      giftsBox.classList.remove("hidden");
     });
   });
 
