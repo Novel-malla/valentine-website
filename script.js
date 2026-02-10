@@ -114,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Safety check (important)
   if (!yesBtn || !noBtn) {
     console.error("Buttons not found in DOM");
-    return;
   }
 
   // No button runs away 😈
@@ -282,4 +281,7 @@ tomorrow, and always? ❤️
     console.log("Back button clicked");
   });
 
+  if (questionBox && (!yesBtn || !noBtn)) {
+    console.error("Buttons not found in DOM");
+  }
 });
