@@ -365,6 +365,8 @@ button {
 #player {
   left: 10px;
   top: 10px;
+  pointer-events: none;
+  transition: left 0.05s linear, top 0.05s linear;
 }
 
 #target {

@@ -269,6 +269,9 @@ tomorrow, and always? ❤️
   function startCatchGame() {
     if (!gameBox || !target) return;
 
+    player.style.left = "10px";
+    player.style.top = "10px";
+
     timeLeft = 15;
     timerText.textContent = "Time: " + timeLeft;
     gameMessage.textContent = "Catch me before time runs out!";
@@ -301,4 +304,29 @@ tomorrow, and always? ❤️
     clearInterval(gameInterval);
     gameMessage.textContent = "You caught me ❤️🥹";
   }
+
+  gameBox.addEventListener("mousemove", (e) => {
+    movePlayer(e.clientX, e.clientY);
+  });
+
+  gameBox.addEventListener("touchmove", (e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    movePlayer(touch.clientX, touch.clientY);
+  }, { passive: false });
+
+  function movePlayer(x, y) {
+    const rect = gameBox.getBoundingClientRect();
+
+    let posX = x - rect.left - player.offsetWidth / 2;
+    let posY = y - rect.top - player.offsetHeight / 2;
+
+    // boundaries
+    posX = Math.max(0, Math.min(posX, gameBox.clientWidth - player.clientWidth));
+    posY = Math.max(0, Math.min(posY, gameBox.clientHeight - player.clientHeight));
+
+    player.style.left = posX + "px";
+    player.style.top = posY + "px";
+  }
+
 });
