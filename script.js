@@ -272,6 +272,8 @@ tomorrow, and always? ❤️
     player.style.left = "10px";
     player.style.top = "10px";
 
+    target.style.display = "block";
+
     timeLeft = 15;
     timerText.textContent = "Time: " + timeLeft;
     gameMessage.textContent = "Catch me before time runs out!";
@@ -305,12 +307,17 @@ tomorrow, and always? ❤️
     moveTarget();
     setTimeout(() => canMove = true, 600);
   });
-  
+
   target?.addEventListener("click", winGame);
 
   function winGame() {
     clearInterval(gameInterval);
-    gameMessage.textContent = "You caught me ❤️🥹";
+
+    gameMessage.textContent = "You found me 🥹❤️";
+
+    target.style.display = "none";
+
+    heartBurst();
   }
 
   gameBox.addEventListener("mousemove", (e) => {
@@ -335,6 +342,29 @@ tomorrow, and always? ❤️
 
     player.style.left = posX + "px";
     player.style.top = posY + "px";
+  }
+
+  function heartBurst() {
+    const centerX = gameBox.clientWidth / 2;
+    const centerY = gameBox.clientHeight / 2;
+
+    for (let i = 0; i < 12; i++) {
+      const heart = document.createElement("div");
+      heart.classList.add("burst-heart");
+      heart.innerHTML = "❤️";
+
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 80 + Math.random() * 40;
+
+      heart.style.left = centerX + "px";
+      heart.style.top = centerY + "px";
+      heart.style.setProperty("--x", Math.cos(angle) * distance + "px");
+      heart.style.setProperty("--y", Math.sin(angle) * distance + "px");
+
+      gameBox.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 1000);
+    }
   }
 
 });

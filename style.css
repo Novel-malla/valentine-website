@@ -382,3 +382,22 @@ button {
 #gameMessage {
   margin-bottom: 10px;
 }
+
+.burst-heart {
+  position: absolute;
+  font-size: 24px;
+  animation: burst 1s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes burst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(var(--x), var(--y)) scale(1.5);
+    opacity: 0;
+  }
+}
