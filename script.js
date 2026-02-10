@@ -67,6 +67,38 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  document.addEventListener("click", (e) => {
+    const backBtn = e.target.closest(".backBtn");
+    if (!backBtn) return;
+
+    // Hide all gift pages
+    document.getElementById("letterGift")?.classList.add("hidden");
+    document.getElementById("videoGift")?.classList.add("hidden");
+    document.getElementById("gameGift")?.classList.add("hidden");
+
+    // Stop video if playing
+    const video = document.querySelector("#videoGift video");
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+
+    // Reset game
+    const gameArea = document.getElementById("gameArea");
+    if (gameArea) {
+      gameArea.innerHTML = "";
+    }
+
+    document.querySelectorAll(".gift").forEach(gift => {
+      gift.classList.remove("open");
+      gift.style.transform = "scale(1)";
+    });
+
+    // Show gifts page
+    giftsBox.classList.remove("hidden");
+    console.log("Back button clicked");
+  });
+
   // Quiz data (CUSTOMIZE QUESTIONS!)
   const quizzes = {
     letter: {
@@ -186,15 +218,17 @@ tomorrow, and always? ❤️
   }
 
   // Gallery → Timer
-  galleryNextBtn.addEventListener("click", () => {
-    showQuiz("timer", () => {
-      giftsBox.classList.add("hidden");
-      timerBox.classList.remove("hidden");
-      updateTimer();
-      setInterval(updateTimer, 1000);
-      startBigHearts();
+  if (galleryNextBtn) {
+    galleryNextBtn.addEventListener("click", () => {
+      showQuiz("timer", () => {
+        giftsBox.classList.add("hidden");
+        timerBox.classList.remove("hidden");
+        updateTimer();
+        setInterval(updateTimer, 1000);
+        startBigHearts();
+      });
     });
-  });
+  }
 
   // Create floating hearts
   function startHearts() {
@@ -253,38 +287,6 @@ tomorrow, and always? ❤️
       startGame();
     }
   }
-
-  document.addEventListener("click", (e) => {
-    const backBtn = e.target.closest(".backBtn");
-    if (!backBtn) return;
-
-    // Hide all gift pages
-    document.getElementById("letterGift")?.classList.add("hidden");
-    document.getElementById("videoGift")?.classList.add("hidden");
-    document.getElementById("gameGift")?.classList.add("hidden");
-
-    // Stop video if playing
-    const video = document.querySelector("#videoGift video");
-    if (video) {
-      video.pause();
-      video.currentTime = 0;
-    }
-
-    // Reset game
-    const gameArea = document.getElementById("gameArea");
-    if (gameArea) {
-      gameArea.innerHTML = "";
-    }
-
-    document.querySelectorAll(".gift").forEach(gift => {
-      gift.classList.remove("open");
-      gift.style.transform = "scale(1)";
-    });
-
-    // Show gifts page
-    giftsBox.classList.remove("hidden");
-    console.log("Back button clicked");
-  });
 
   if (questionBox && (!yesBtn || !noBtn)) {
     console.error("Buttons not found in DOM");
