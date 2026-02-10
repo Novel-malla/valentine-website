@@ -297,7 +297,15 @@ tomorrow, and always? ❤️
     target.style.top = Math.random() * maxY + "px";
   }
 
-  target?.addEventListener("mouseenter", moveTarget);
+  let canMove = true;
+
+  target.addEventListener("mouseenter", () => {
+    if (!canMove) return;
+    canMove = false;
+    moveTarget();
+    setTimeout(() => canMove = true, 600);
+  });
+  
   target?.addEventListener("click", winGame);
 
   function winGame() {
