@@ -276,6 +276,11 @@ tomorrow, and always? ❤️
       gameArea.innerHTML = "";
     }
 
+    document.querySelectorAll(".gift").forEach(gift => {
+      gift.classList.remove("open");
+      gift.style.transform = "scale(1)";
+    });
+
     // Show gifts page
     giftsBox.classList.remove("hidden");
     console.log("Back button clicked");
