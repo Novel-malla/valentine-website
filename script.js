@@ -21,41 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const giftsBox = document.getElementById("giftsBox");
   const gifts = document.querySelectorAll(".gift");
 
-  let currentCallback = null;
-
-  let score = 0;
-  const gameArea = document.getElementById("gameArea");
-  const scoreText = document.getElementById("scoreText");
-
-  function startGame() {
-    score = 0;
-    scoreText.textContent = "Score: 0";
-
-    const interval = setInterval(() => {
-      const heart = document.createElement("div");
-      heart.classList.add("game-heart");
-      heart.innerHTML = "❤️";
-
-      heart.style.left = Math.random() * 90 + "%";
-      heart.style.top = Math.random() * 80 + "%";
-
-      heart.onclick = () => {
-        score++;
-        scoreText.textContent = "Score: " + score;
-        heart.remove();
-
-        if (score === 3) {
-          clearInterval(interval);
-          alert("You caught my heart ❤️🥹");
-        }
-      };
-
-      gameArea.appendChild(heart);
-
-      setTimeout(() => heart.remove(), 2000);
-    }, 800);
-  }
-
   gifts.forEach(gift => {
     gift.addEventListener("click", () => {
       gift.classList.add("open");
@@ -284,11 +249,56 @@ tomorrow, and always? ❤️
 
     if (type === "game") {
       document.getElementById("gameGift").classList.remove("hidden");
-      startGame();
+      startCatchGame();
     }
   }
 
   if (questionBox && (!yesBtn || !noBtn)) {
     console.error("Buttons not found in DOM");
+  }
+
+  let gameInterval = null;
+  let timeLeft = 15;
+
+  const gameBox = document.getElementById("gameBox");
+  const player = document.getElementById("player");
+  const target = document.getElementById("target");
+  const timerText = document.getElementById("timerText");
+  const gameMessage = document.getElementById("gameMessage");
+
+  function startCatchGame() {
+    if (!gameBox || !target) return;
+
+    timeLeft = 15;
+    timerText.textContent = "Time: " + timeLeft;
+    gameMessage.textContent = "Catch me before time runs out!";
+
+    moveTarget();
+
+    gameInterval = setInterval(() => {
+      timeLeft--;
+      timerText.textContent = "Time: " + timeLeft;
+
+      if (timeLeft <= 0) {
+        clearInterval(gameInterval);
+        gameMessage.textContent = "Too slow 😜 Try again!";
+      }
+    }, 1000);
+  }
+
+  function moveTarget() {
+    const maxX = gameBox.clientWidth - target.clientWidth;
+    const maxY = gameBox.clientHeight - target.clientHeight;
+
+    target.style.left = Math.random() * maxX + "px";
+    target.style.top = Math.random() * maxY + "px";
+  }
+
+  target?.addEventListener("mouseenter", moveTarget);
+  target?.addEventListener("click", winGame);
+
+  function winGame() {
+    clearInterval(gameInterval);
+    gameMessage.textContent = "You caught me ❤️🥹";
   }
 });

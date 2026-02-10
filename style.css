@@ -343,3 +343,40 @@ button {
   background: #ff4d6d;
   color: white;
 }
+
+#gameBox {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border: 2px dashed #ff4d6d;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+#player,
+#target {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  user-select: none;
+}
+
+#player {
+  left: 10px;
+  top: 10px;
+}
+
+#target {
+  cursor: pointer;
+  transition: left 0.3s, top 0.3s;
+}
+
+#timerText {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+#gameMessage {
+  margin-bottom: 10px;
+}
