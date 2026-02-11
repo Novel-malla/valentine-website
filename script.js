@@ -336,7 +336,7 @@ tomorrow, and always? ❤️
   function winGame() {
     clearInterval(gameInterval);
 
-    gameMessage.textContent = "You found me 🥹❤️";
+    gameMessage.textContent = "You found me, Sansa 🥹❤️";
 
     target.style.display = "none";
 

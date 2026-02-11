@@ -407,3 +407,29 @@ button {
   background: #ff4d6d;
   color: white;
 }
+
+.letter-page {
+  background: #f7f1e3;
+}
+
+.letter-paper {
+  background: #fffdf8;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.letter-text {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #333;
+  text-align: left;
+}
+
+.letter-sign {
+  display: block;
+  margin-top: 25px;
+}
