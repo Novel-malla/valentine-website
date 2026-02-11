@@ -239,6 +239,8 @@ tomorrow, and always? ❤️
   function openGift(type) {
     giftsBox.classList.add("hidden");
 
+    markGiftOpened(type);
+
     if (type === "letter") {
       document.getElementById("letterGift").classList.remove("hidden");
     }
@@ -251,6 +253,19 @@ tomorrow, and always? ❤️
       document.getElementById("gameGift").classList.remove("hidden");
       startCatchGame();
     }
+  }
+
+  const giftsNextBtn = document.getElementById("giftsNextBtn");
+
+  if (giftsNextBtn) {
+    giftsNextBtn.addEventListener("click", () => {
+      showQuiz("timer", () => {
+        giftsBox.classList.add("hidden");
+        timerBox.classList.remove("hidden");
+        updateTimer();
+        setInterval(updateTimer, 1000);
+      });
+    });
   }
 
   if (questionBox && (!yesBtn || !noBtn)) {
@@ -307,6 +322,14 @@ tomorrow, and always? ❤️
     moveTarget();
     setTimeout(() => canMove = true, 600);
   });
+
+  target.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    if (!canMove) return;
+    canMove = false;
+    moveTarget();
+    setTimeout(() => canMove = true, 600);
+  }, { passive: false });
 
   target?.addEventListener("click", winGame);
 
@@ -367,4 +390,13 @@ tomorrow, and always? ❤️
     }
   }
 
+  let openedGifts = new Set();
+
+  function markGiftOpened(type) {
+    openedGifts.add(type);
+
+    if (openedGifts.size === 3) {
+      document.getElementById("giftsNextBtn").classList.remove("hidden");
+    }
+  }
 });

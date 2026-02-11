@@ -401,3 +401,9 @@ button {
     opacity: 0;
   }
 }
+
+#giftsNextBtn {
+  margin-top: 25px;
+  background: #ff4d6d;
+  color: white;
+}
