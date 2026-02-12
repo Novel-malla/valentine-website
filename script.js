@@ -41,11 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("videoGift")?.classList.add("hidden");
     document.getElementById("gameGift")?.classList.add("hidden");
 
-    // Stop video if playing
-    const video = document.querySelector("#videoGift video");
-    if (video) {
-      video.pause();
-      video.currentTime = 0;
+    // Stop YouTube video if playing
+    const ytIframe = document.getElementById("youtubePlayer");
+    if (ytIframe) {
+      const src = ytIframe.src;
+      ytIframe.src = src; // reloads iframe → stops video
     }
 
     // Reset game
